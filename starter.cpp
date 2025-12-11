@@ -73,16 +73,16 @@ public:
 
 
 int main() {
-    std::vector<Shape*> canvas;
+    std::vector<std::unique_ptr<Shape>> canvas;
 
     // TASK 10: Create a "Red" Circle (with radius 5.0) and add its pointer to the canvas.
     // Use std::make_unique and push_back functions.
     Circle Red = Circle("Red", 5.0);
-    canvas.push_back(&Red);
+    canvas.push_back(std::make_unique<Circle>(Red));
     
     // TASK 11: Create a "Blue" Rectangle (10.0 x 8.0) and add its pointer to the canvas.
     Rectangle Blue = Rectangle("Blue", 10.0, 8.0);
-    canvas.push_back(&Blue);
+    canvas.push_back(std::make_unique<Rectangle>(Blue));
 
     for (const auto& s : canvas) {
         // TASK 12: Call the draw method polymorphically.
@@ -92,8 +92,8 @@ int main() {
     canvas.clear();
 
     // TASK 13: Delete Memories
-    Red.~Circle();
-    Blue.~Rectangle();
+    Circle 불량 = Circle("불량", 3.14);
+    불량.~Circle();
 
     return 0;
 }
